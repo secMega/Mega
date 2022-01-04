@@ -1,4 +1,4 @@
-#!/usr/bin/env bash\r
+#!/usr/bin/env bash
 cd $HOME/Mega
 rm -rf $HOME/.telegram-cli
 install() {
