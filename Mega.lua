@@ -13475,7 +13475,7 @@ local notText = '• عذرا الاوامر هذه لا تخصك'
 https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callback_query_id="..data.id_.."&text="..URL.escape(notText).."&show_alert=true")
 return false
 end
-DeleteMessage(data.chat_id_, {[0] = Msg_id})  
+DeleteMessage(msg.chat_id_, {[0] = msg.id_})  
 end
 
 if DAata and DAata:match("^animation(.*)$") and Addictive(data) then  
