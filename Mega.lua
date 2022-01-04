@@ -5994,7 +5994,6 @@ send(msg.chat_id_, msg.id_, ktSJJJJ[ktbrok])
 end
 
 
-
 if text == "مبرمج السورس" or text == "مطور السورس" or text == "وين المبرمج" or text == "المبرمج" then   
    
 Text = "\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n• [Developer 𝚂𝚘𝚞𝚛𝚌𝚎 .](http://t.me/MMSSDS) •\n ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉"
@@ -7657,6 +7656,7 @@ send(msg.chat_id_, msg.id_,"•  تمت ترقية { "..num2.." } من ادمن�
 end
 end,nil)   
 end
+
 if text == "المنشئ" or text =="المالك"  then
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,data) 
 local admins = data.members_
@@ -7685,6 +7685,7 @@ end
 end
 end,nil)  
 end
+
 if text ==("رفع المنشئ") and DevBot(msg) then 
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,data) 
 local admins = data.members_
