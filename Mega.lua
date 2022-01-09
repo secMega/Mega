@@ -5165,7 +5165,7 @@ end
 return false
 end
 send(msg.chat_id_,msg.id_," *• حسنآ ارسل اليه الرابط الان*")
-database:setex(bot_id.."Matrix:Set:PMatrixvate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
+database:setex(bot_id.."Mega:Set:PMegavate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
 return false
 end
 end
