@@ -5165,7 +5165,7 @@ end
 return false
 end
 send(msg.chat_id_,msg.id_," *• حسنآ ارسل اليه الرابط الان*")
-database:setex(bot_id.."Mega:Set:PMegavate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
+database:setex(bot_id.."Matrix:Set:PMatrixvate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
 return false
 end
 end
@@ -13495,7 +13495,7 @@ local idchci = database:get(bot_id.."Mega:Filter:msg")
 local photo = DAata:match("^pito(.*)$")
 local Text ="• تم اللغاء منعها بنجاح"
 inline = {
-{{text = '•  VeCto 𝖲𝗈??𝗋𝖼𝖾 .  .',url='http://t.me/TeAm_VeCto'}},
+{{text = '•  VeCto 𝖲𝗈u𝗋𝖼𝖾 .  .',url='http://t.me/TeAm_VeCto'}},
 }
 https.request("https://api.telegram.org/bot"..token.."/deleteMessage?chat_id="..Chat_id.."&message_id="..msg_idd)
 send_inlin_key(Chat_id,Text,inline)
