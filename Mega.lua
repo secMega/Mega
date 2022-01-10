@@ -5221,7 +5221,7 @@ end
 return false
 end
 send(msg.chat_id_,msg.id_," *• تم مسح الرابط*")   
-database:del(bot_id.."Private:Group:Link"..msg.chat_id_) 
+database:del(bot_id.."Mega:Private:Group:Link"..msg.chat_id_) 
 return false  
 end
 end
