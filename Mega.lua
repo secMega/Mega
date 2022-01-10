@@ -5149,23 +5149,19 @@ database:del(bot_id.."Link_Group:status"..msg.chat_id_)
 send(msg.chat_id_, msg.id_," *• تم تعطيل الرابط*") 
 return false end
 end
-if text == "ضع رابط" or text == 'وضع رابط' then
-if msg.reply_to_message_id_ == 0  and Addictive(msg) then  
+if text == "ضع رابط" or text == "وضع رابط" then
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
 if textchuser then
 send(msg.chat_id_, msg.id_,'['..textchuser..']')
 else
-local texte = '['..database:get(bot_id..'add:ch:username')..']'
-local titlech = (database:get(bot_id..'add:ch:title') or 'آشـترگ بآلقنآ‌‏هہ ')
-key = {{{text=''..titlech..'',url='https://telegram.me/'..database:get(bot_id..'add:ch:username'):gsub("@","")}}}   
-send_inline_key(msg.chat_id_,"\nعذراً يجب عليك الاشتراك في "..texte.."\nليمكنك استخدام البوت بشكل كامل",nil,key,msg.id_/2097152/0.5)
+send(msg.chat_id_, msg.id_,'• عـليك الاشـتࢪاك في قنـاة البـوت اولآ . \n • قنـاة البـوت ↺  ['..database:get(bot_id..'add:ch:username')..']')
 end
-
 return false
 end
-send(msg.chat_id_,msg.id_," *• حسنآ ارسل اليه الرابط الان*")
-database:setex(bot_id.."Mega:Set:PMegavate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
+if msg.reply_to_message_id_ == 0  and Addictive(msg) then  
+send(msg.chat_id_,msg.id_,"• ارسل رابط المجموعه او رابط قناة المجموعه")
+database:setex(bot_id.."Mega:Set:Priovate:Group:Link"..msg.chat_id_..""..msg.sender_user_id_,120,true) 
 return false
 end
 end
